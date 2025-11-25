@@ -1,58 +1,49 @@
-import { Activity, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FlatList, View, StyleSheet } from 'react-native'
 import axios from 'axios'
 import { ActivityIndicator, Card, Text } from 'react-native-paper'
 
-export default function App() {
+export default function App(){
   const [produtos, setProdutos] = useState([])
   const [loading, setLoading] = useState(true)
 
-  const API_URL = 'https://691bc2803aaeed735c8e2d4f.mockapi.io/produtos/api/v1/produto'
+  const API_URL = 'https://67f51ca7913986b16fa349ce.mockapi.io/meditime/api/v1/produto'
 
   useEffect(() => {
     axios.get(API_URL)
       .then(response => {
         setProdutos(response.data)
-
       })
-
       .catch(error => {
-        console.log('Erro ao Buscar os Produtos', error)
+        console.log('Erro ao buscar os produtos', error)
       })
-
       .finally(() => {
         setLoading(false)
       })
   })
 
-
-
-
-
-
-
-
-  const renderItem = ({ item }) => (
+  const renderItem = ({item}) => (
     <Card style={styles.card}>
-      <Card.Cover source={{ uri: item.imagem }} />
-      <Card.Title title={item.nome} subtitle={item.descricao} />
+      <Card.Cover source={{uri: item.imagem}}  />
+      <Card.Title title={item.nome} subtitle={item.descricao}/>
       <Card.Content>
         <Text style={styles.preco}>{item.preco}</Text>
       </Card.Content>
     </Card>
   )
 
-  return (
+  return(
     <View style={styles.container}>
-      {loading ? (
+      { loading ? (
         <ActivityIndicator size="large" />
       ) : (
-      <FlatList
-        data={produtos}
-        keyExtractor={(item) => item.id}
-        renderItem={renderItem}
-      />
+        <FlatList 
+          data={produtos}
+          keyExtractor={(item) => item.id}
+          renderItem={renderItem}
+        />
       )}
+
     </View>
   )
 }

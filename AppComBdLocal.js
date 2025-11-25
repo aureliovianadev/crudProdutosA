@@ -33,7 +33,7 @@ export default function AppComBdLocal(){
     }
   ]
 
-  const renderItem = ({item}) => (
+  const itemRenderizado = ({item}) => (
     <Card style={styles.card}>
       <Card.Cover source={{uri: item.imagem}}  />
       <Card.Title title={item.nome} subtitle={item.descricao}/>
@@ -48,7 +48,7 @@ export default function AppComBdLocal(){
       <FlatList 
         data={produtos}
         keyExtractor={(item) => item.id}
-        renderItem={renderItem}
+        renderItem={itemRenderizado}
       />
     </View>
   )
